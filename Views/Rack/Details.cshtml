@@ -1,0 +1,36 @@
+﻿@model StoreManagement_Project.Models.Rack
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Rack</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RackName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RackName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Warehouse)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Warehouse.WarehouseId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RackId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LocationComponent>
+
+@{
+    ViewData["Title"] = "Location Components";
+}
+
+<h2>Location Components</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Warehouse</th>
+            <th>Aisle</th>
+            <th>Zone</th>
+            <th>Rack</th>
+            <th>Shelf</th>
+            <th>Bin</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var locationComponent in Model)
+        {
+            <tr>
+                <td>@locationComponent.Warehouse?.Name</td>
+                <td>@locationComponent.Aisle?.AisleName</td>
+                <td>@locationComponent.Zone?.ZoneName</td>
+                <td>@locationComponent.Rack?.RackName</td>
+                <td>@locationComponent.Shelf?.ShelfName</td>
+                <td>@locationComponent.Bin?.BinName</td>
+                <td>
+                    <a href="@Url.Action("Edit", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Details", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-info btn-sm">Details</a>
+                    <a href="@Url.Action("Delete", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "LocationComponent")" class="btn btn-primary">Create New Location Component</a>
+

@@ -1,0 +1,427 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = StoreManagement_Project
+build_property.RootNamespace = StoreManagement_Project
+build_property.ProjectDir = D:\IDB_R62_Juhan\Module09\Store_Management_Project\StoreManagement_Project\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\IDB_R62_Juhan\Module09\Store_Management_Project\StoreManagement_Project
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Aisle/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlzbGVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Aisle/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlzbGVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Aisle/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlzbGVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Aisle/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlzbGVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Aisle/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWlzbGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Bin/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Bin/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Bin/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Bin/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Bin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Brand/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Brand/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Brand/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Brand/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Brand/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Category/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Category/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Category/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Category/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Category/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Currency/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VycmVuY3lcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Currency/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VycmVuY3lcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Currency/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VycmVuY3lcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Currency/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VycmVuY3lcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Currency/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VycmVuY3lcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/GRN/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR1JOXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/GRN/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR1JOXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/GRN/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR1JOXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/GRN/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR1JOXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/GRN/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR1JOXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Item/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Item/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Item/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Item/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXRlbVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/LocationComponent/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpb25Db21wb25lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/LocationComponent/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYXRpb25Db21wb25lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PackSize/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja1NpemVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PackSize/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja1NpemVcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PackSize/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja1NpemVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PackSize/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja1NpemVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PackSize/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja1NpemVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PurchaseOrder/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VPcmRlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PurchaseOrder/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VPcmRlclxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PurchaseOrder/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VPcmRlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PurchaseOrder/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VPcmRlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/PurchaseOrder/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVyY2hhc2VPcmRlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Rack/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFja1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Rack/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFja1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Rack/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFja1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Rack/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFja1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Rack/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFja1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shelf/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hlbGZcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shelf/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hlbGZcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shelf/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hlbGZcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shelf/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hlbGZcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shelf/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hlbGZcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Stock/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Stock/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Stock/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Stock/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Stock/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/SubCategory/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/SubCategory/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/SubCategory/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViQ2F0ZWdvcnlcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/SubCategory/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/SubCategory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Supplier/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Supplier/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Supplier/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Supplier/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Supplier/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSetWithUnits/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFdpdGhVbml0c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSetWithUnits/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFdpdGhVbml0c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSet/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSet/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSet/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSet/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/UnitSet/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFNldFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Unit/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Unit/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Unit/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Unit/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Unit/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVW5pdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Warehouse/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Warehouse/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Warehouse/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Warehouse/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Warehouse/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2FyZWhvdXNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Zone/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWm9uZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Zone/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWm9uZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Zone/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWm9uZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Zone/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWm9uZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Zone/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWm9uZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IDB_R62_Juhan/Module09/Store_Management_Project/StoreManagement_Project/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-5hgmoituz0

@@ -1,0 +1,203 @@
+﻿@model StoreManagement_Project.ViewModels.GRNViewModel
+
+@{
+    ViewData["Title"] = "Create GRN";
+}
+
+<h2>Create Item Receieved</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="SupplierId">Supplier</label>
+            <select asp-for="SupplierId" class="form-control" asp-items="Model.Suppliers" id="supplierDropdown">
+                <option value="">-- Select Supplier --</option>
+            </select>
+        </div>
+        </div>
+
+        <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="PurchaseOrderId">Purchase Order ID</label>
+            <select asp-for="PurchaseOrderId" class="form-control" asp-items="Model.PurchaseOrders" id="poDropdown">
+                <option value="">-- Select PO --</option>
+            </select>
+        </div>
+        </div>
+        <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="WarehouseId">Warehouse</label>
+            <select asp-for="WarehouseId" class="form-control" id="warehouseDropdown" readonly>
+                <option value="">-- Select Warehouse --</option>
+                 @foreach (var warehouse in Model.Warehouses)
+                 {
+                   <option value="@warehouse.WarehouseId" data-address="@warehouse.Address">
+                    @warehouse.Name
+                    </option>
+                 }
+            </select>
+        </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ReceivedDate">Received Date</label>
+                <input asp-for="ReceivedDate" class="form-control" type="date"  />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="InvoiceDate"></label>
+                <input asp-for="InvoiceDate" class="form-control" type="date" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="InvoiceNo"></label>
+                <input asp-for="InvoiceNo" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReceivedBy"></label>
+        <input asp-for="ReceivedBy" class="form-control" placeholder="Enter any specific requirements or notes..." />
+    </div>
+
+    <hr />
+    <h4>Items</h4>
+    <table class="table" id="itemsTable">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Ordered Qty</th>
+                <th>Unit</th>
+                <th>Qty Receive</th>
+                <th>Remaining Qty</th>
+                <th>
+                    Inspection
+                    <input type="checkbox" id="checkAllInspection" />
+                </th>
+            </tr>
+        </thead>
+        <tbody id="itemRows">
+            <!-- Filled via JS -->
+        </tbody>
+    </table>
+
+    <input type="hidden" asp-for="GRNNumber" />
+
+    <button type="submit" class="btn btn-primary">Save GRN</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#poDropdown').change(function () {
+                const poId = $(this).val();
+                $('#itemRows').empty();
+                $('#warehouseDropdown').val("").prop('disabled', true); // Warehouse reset and disable
+
+                if (poId) {
+                    // Auto-generate GRN number
+                    $.getJSON(`/GRN/GenerateGRNNumber?purchaseOrderId=${poId}`, function (grnNo) {
+                        $('input[name="GRNNumber"]').val(grnNo);
+                    });
+
+                    // Get PO Items where RemainingQuantity > 0
+                    $.getJSON(`/GRN/GetPOItems?purchaseOrderId=${poId}`, function (items) {
+                        if (items.length === 0) {
+                            $('#itemRows').append(`
+                                <tr>
+                                    <td colspan="6" class="text-center text-danger">All items in this PO are already received.</td>
+                                </tr>
+                            `);
+                        } else {
+                            $.each(items, function (i, item) {
+                                // const row = `
+                                //         <tr>
+                                //         <td>${item.itemName}</td>
+                                //         <td>${item.quantity}</td>
+                                //         <td>${item.unitName}</td>
+                                //         <td><input type="number" name="GRNItems[${i}].QuantityReceived" class="form-control" value="0" min="0" max="${item.remainingQuantity}" /></td>
+                                //         <td>${item.remainingQuantity}</td>
+                                //         <td class="text-center"><input type="checkbox" name="GRNItems[${i}].Inspection" value="true" class="inspectionCheckbox" /></td>
+                                //     </tr>                                     
+                                                                      
+
+                                // `;
+                                // $('#itemRows').append(row);
+
+                                const row = `
+                                <tr>
+                                    <td>${item.itemName}<input type="hidden" name="GRNItems[${i}].ItemId" value="${item.itemId}" /></td>
+                                    <td>${item.quantity}</td>
+                                    <td>${item.unitName}</td>
+                                    <td><input type="number" name="GRNItems[${i}].QuantityReceived" class="form-control" value="0" min="0" max="${item.remainingQuantity}" /></td>
+                                    <td>${item.remainingQuantity}</td>
+                                    <td class="text-center"><input type="checkbox" name="GRNItems[${i}].Inspection" value="true" class="inspectionCheckbox" /></td>
+                                </tr>
+                                        `;
+                                $('#itemRows').append(row);
+                            });
+                        }
+                    });
+
+                    // Automatically set warehouse based on PO
+                    $.getJSON(`/GRN/GetWarehouseByPO?purchaseOrderId=${poId}`, function (warehouse) {
+                        if (warehouse) {
+                            $('#warehouseDropdown').val(warehouse.warehouseId).prop('disabled', true);
+                        }
+                    });
+                }
+            });
+
+            // Check All / Uncheck All Inspection Checkboxes
+            $('#checkAllInspection').change(function () {
+                $('.inspectionCheckbox').prop('checked', $(this).prop('checked'));
+            });
+
+            // When supplier is changed, load Purchase Orders
+            $('#supplierDropdown').change(function () {
+                const supplierId = $(this).val();
+                $('#poDropdown').empty().append('<option value="">-- Select PO --</option>');
+                $('#itemRows').empty();
+                if (supplierId) {
+                    $.getJSON(`/GRN/GetPurchaseOrdersBySupplier?supplierId=${supplierId}`, function (pos) {
+                        $.each(pos, function (i, po) {
+                            $('#poDropdown').append(`<option value="${po.purchaseOrderId}">${po.poNo}</option>`);
+                        });
+                    });
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const invoiceDateInput = document.getElementById("InvoiceDate");
+
+            // Auto-set value to system date - 1 day
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            invoiceDateInput.value = yesterday.toISOString().split("T")[0];
+
+            // Prevent selecting future dates
+            invoiceDateInput.addEventListener("change", function () {
+                const selectedDate = new Date(this.value);
+                if (selectedDate > yesterday) {
+                    alert("Invoice Date must be at most one day earlier than today's date!");
+                    this.value = yesterday.toISOString().split("T")[0];
+                }
+            });
+        });
+
+
+    </script>
+  }
+

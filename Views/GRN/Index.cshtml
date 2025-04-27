@@ -1,0 +1,42 @@
+﻿@model IEnumerable<StoreManagement_Project.Models.GRN>
+
+@{
+    ViewData["Title"] = "GRN List";
+}
+
+<h2>Item Received List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Item Received</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>GRN Number</th>
+            <th>Supplier</th>
+            <th>PO Number</th>
+            <th>Received Date</th>
+            <th>Invoice No</th>
+            <th>Received By</th>           
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var grn in Model)
+        {
+            <tr>
+                <td>@grn.GRNNumber</td>
+                <td>@grn.Supplier?.SupplierName</td>
+                <td>@grn.PurchaseOrder?.PONo</td>
+                <td>@grn.ReceivedDate.ToString("yyyy-MM-dd")</td>
+                <td>@grn.InvoiceNo</td>
+                <td>@grn.ReceivedBy</td>                
+                <td>
+                    <a asp-action="Details" asp-route-id="@grn.GRNId" class="btn btn-info btn-sm">Details</a>
+                    @* <a asp-action="Edit" asp-route-id="@grn.GRNId" class="btn btn-warning btn-sm">Edit</a> *@
+                    @* <a asp-action="Delete" asp-route-id="@grn.GRNId" class="btn btn-danger btn-sm">Delete</a> *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
