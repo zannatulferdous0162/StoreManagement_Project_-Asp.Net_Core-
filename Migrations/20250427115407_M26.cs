@@ -5,7 +5,7 @@
 namespace StoreManagement_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class zannat : Migration
+    public partial class M26 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

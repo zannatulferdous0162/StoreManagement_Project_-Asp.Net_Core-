@@ -62,6 +62,7 @@ namespace StoreManagement_Project.Controllers
                     GRNNumber = model.GRNNumber,
                     SupplierId = model.SupplierId,
                     PurchaseOrderId = model.PurchaseOrderId,
+                    WarehouseId = model.WarehouseId,
                     ReceivedDate = model.ReceivedDate,
                     InvoiceDate = (DateTime)model.InvoiceDate,
                     InvoiceNo = model.InvoiceNo,
@@ -82,11 +83,13 @@ namespace StoreManagement_Project.Controllers
                     grn.GRNItems.Add(new GRNItem
                     {
                         ItemId = item.ItemId,
+                        LocationComponentId = item.LocationComponentId,
                         ItemName = item.ItemName,
                         Quantity = item.Quantity,
                         UnitName = item.UnitName,
                         QuantityReceived = item.QuantityReceived,
-                        RemainingQuantity = remainingQty < 0 ? 0 : remainingQty
+                        RemainingQuantity = remainingQty < 0 ? 0 : remainingQty,
+                        Inspection = item.Inspection
                     });
 
                     var stock = await _context.Stocks.FirstOrDefaultAsync(s => s.ItemId == item.ItemId);
@@ -199,7 +202,7 @@ namespace StoreManagement_Project.Controllers
                 .Where(l => l.WarehouseId == warehouseId) // top-level
                 .Select(l => new {
                     l.LocationComponentId,
-                    //l.LocationComponentName
+                    l.Location
                 }).ToList();
 
             return Json(locations);
@@ -231,21 +234,6 @@ namespace StoreManagement_Project.Controllers
 
             return Json(grnNumber);
         }
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    var grn = await _context.GRNs
-        //        .Include(g => g.Supplier)
-        //        .Include(g => g.PurchaseOrder)
-        //        .Include(g => g.Warehouse)
-        //        .Include(g => g.GRNItems)
-        //            //.ThenInclude(gi => gi.Item)
-        //        .FirstOrDefaultAsync(g => g.GRNId == id);
-
-        //    if (grn == null)
-        //        return NotFound();
-
-        //    return View(grn);
-        //}
 
         public async Task<IActionResult> Details(int id)
         {

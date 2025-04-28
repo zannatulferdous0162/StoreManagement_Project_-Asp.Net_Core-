@@ -3,6 +3,7 @@
     public class LocationComponent
     {
         public int? LocationComponentId { get; set; }
+        public string? Location { get; set; }
         public int? AisleId { get; set; }
         public Aisle? Aisle { get; set; }
         public int? ZoneId { get; set; }

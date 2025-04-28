@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\StoreManagement_Project_(Asp.Net_Core)\\StoreManagement_Project.csproj": {}
+    "D:\\StoreManagement_Project_16_UpdateGRN\\StoreManagement_Project.csproj": {}
   },
   "projects": {
-    "D:\\StoreManagement_Project_(Asp.Net_Core)\\StoreManagement_Project.csproj": {
+    "D:\\StoreManagement_Project_16_UpdateGRN\\StoreManagement_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\StoreManagement_Project_(Asp.Net_Core)\\StoreManagement_Project.csproj",
+        "projectUniqueName": "D:\\StoreManagement_Project_16_UpdateGRN\\StoreManagement_Project.csproj",
         "projectName": "StoreManagement_Project",
-        "projectPath": "D:\\StoreManagement_Project_(Asp.Net_Core)\\StoreManagement_Project.csproj",
+        "projectPath": "D:\\StoreManagement_Project_16_UpdateGRN\\StoreManagement_Project.csproj",
         "packagesPath": "C:\\Users\\HASSAN AL BANNA\\.nuget\\packages\\",
-        "outputPath": "D:\\StoreManagement_Project_(Asp.Net_Core)\\obj\\",
+        "outputPath": "D:\\StoreManagement_Project_16_UpdateGRN\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

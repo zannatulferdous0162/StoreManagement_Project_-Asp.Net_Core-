@@ -9,6 +9,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>Location</th>
             <th>Warehouse</th>
             <th>Aisle</th>
             <th>Zone</th>
@@ -22,6 +23,7 @@
         @foreach (var locationComponent in Model)
         {
             <tr>
+                <td>@locationComponent.Location</td>
                 <td>@locationComponent.Warehouse?.Name</td>
                 <td>@locationComponent.Aisle?.AisleName</td>
                 <td>@locationComponent.Zone?.ZoneName</td>
@@ -29,7 +31,7 @@
                 <td>@locationComponent.Shelf?.ShelfName</td>
                 <td>@locationComponent.Bin?.BinName</td>
                 <td>
-                    <a href="@Url.Action("Edit", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-warning btn-sm">Edit</a>
+                    @* <a href="@Url.Action("Edit", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-warning btn-sm">Edit</a> *@
                     <a href="@Url.Action("Details", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-info btn-sm">Details</a>
                     <a href="@Url.Action("Delete", "LocationComponent", new { id = locationComponent.LocationComponentId })" class="btn btn-danger btn-sm">Delete</a>
                 </td>

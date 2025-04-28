@@ -49,97 +49,96 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="form-group">
+        <label asp-for="Location">Location</label>
+        <input type="text" id="Location" asp-for="Location" class="form-control" readonly />
+    </div>
+
+    <button type="submit" id="submitButton" class="btn btn-primary">Save</button>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </form>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Cascade dropdown for Aisles based on Warehouse selection
+
+            // যখন Warehouse select হবে
             $('#WarehouseId').change(function () {
                 var warehouseId = $(this).val();
-                $('#AisleId').empty().append('<option value="">-- Select Aisle --</option>');
-
+                clearDropdowns();
                 if (warehouseId) {
                     $.getJSON('/LocationComponent/GetAisles', { warehouseId: warehouseId }, function (data) {
-                        $.each(data, function (index, item) {
-                            $('#AisleId').append($('<option/>', {
-                                value: item.value,
-                                text: item.text
-                            }));
-                        });
+                        populateDropdown('#AisleId', data);
+                    });
+                    $.getJSON('/LocationComponent/GetZones', { warehouseId: warehouseId }, function (data) {
+                        populateDropdown('#ZoneId', data);
+                    });
+                    $.getJSON('/LocationComponent/GetRacks', { warehouseId: warehouseId }, function (data) {
+                        populateDropdown('#RackId', data);
+                    });
+                    $.getJSON('/LocationComponent/GetShelves', { warehouseId: warehouseId }, function (data) {
+                        populateDropdown('#ShelfId', data);
+                    });
+                    $.getJSON('/LocationComponent/GetBins', { warehouseId: warehouseId }, function (data) {
+                        populateDropdown('#BinId', data);
                     });
                 }
+                updateLocation();
             });
 
-            // Cascade dropdown for Zones based on Aisle selection
-            $('#AisleId').change(function () {
-                var aisleId = $(this).val();
-                $('#ZoneId').empty().append('<option value="">-- Select Zone --</option>');
+            $('#AisleId, #ZoneId, #RackId, #ShelfId, #BinId').change(function () {
+                updateLocation();
+            });
 
-                if (aisleId) {
-                    $.getJSON('/LocationComponent/GetZones', { aisleId: aisleId }, function (data) {
-                        $.each(data, function (index, item) {
-                            $('#ZoneId').append($('<option/>', {
-                                value: item.value,
-                                text: item.text
-                            }));
-                        });
+            function populateDropdown(selector, data) {
+                $(selector).empty().append('<option value="">-- Select --</option>');
+                $.each(data, function (index, item) {
+                    $(selector).append($('<option/>', {
+                        value: item.value,
+                        text: item.text
+                    }));
+                });
+            }
+
+            function clearDropdowns() {
+                $('#AisleId, #ZoneId, #RackId, #ShelfId, #BinId').empty().append('<option value="">-- Select --</option>');
+            }
+
+            function updateLocation() {
+                var locationParts = [];
+
+                var aisleText = $("#AisleId option:selected").text();
+                var zoneText = $("#ZoneId option:selected").text();
+                var rackText = $("#RackId option:selected").text();
+                var shelfText = $("#ShelfId option:selected").text();
+                var binText = $("#BinId option:selected").text();
+
+                if (aisleText && aisleText !== "-- Select --" && aisleText !== "-- Select Aisle --") locationParts.push("Aisle " + aisleText);
+                if (zoneText && zoneText !== "-- Select --" && zoneText !== "-- Select Zone --") locationParts.push("Zone " + zoneText);
+                if (rackText && rackText !== "-- Select --" && rackText !== "-- Select Rack --") locationParts.push("Rack " + rackText);
+                if (shelfText && shelfText !== "-- Select --" && shelfText !== "-- Select Shelf --") locationParts.push("Shelf " + shelfText);
+                if (binText && binText !== "-- Select --" && binText !== "-- Select Bin --") locationParts.push("Bin " + binText);
+
+                var fullLocation = locationParts.join(" > ");
+                $('#Location').val(fullLocation);
+
+                // Check Duplicate
+                if (fullLocation) {
+                    $.getJSON('/LocationComponent/CheckDuplicateLocation', { location: fullLocation }, function (isValid) {
+                        if (!isValid) {
+                            $('#locationError').show();
+                            $('#submitButton').prop('disabled', true);
+                        } else {
+                            $('#locationError').hide();
+                            $('#submitButton').prop('disabled', false);
+                        }
                     });
+                } else {
+                    $('#locationError').hide();
+                    $('#submitButton').prop('disabled', false);
                 }
-            });
-
-            // Cascade dropdown for Racks based on Zone selection
-            $('#ZoneId').change(function () {
-                var zoneId = $(this).val();
-                $('#RackId').empty().append('<option value="">-- Select Rack --</option>');
-
-                if (zoneId) {
-                    $.getJSON('/LocationComponent/GetRacks', { zoneId: zoneId }, function (data) {
-                        $.each(data, function (index, item) {
-                            $('#RackId').append($('<option/>', {
-                                value: item.value,
-                                text: item.text
-                            }));
-                        });
-                    });
-                }
-            });
-
-            // Cascade dropdown for Shelves based on Rack selection
-            $('#RackId').change(function () {
-                var rackId = $(this).val();
-                $('#ShelfId').empty().append('<option value="">-- Select Shelf --</option>');
-
-                if (rackId) {
-                    $.getJSON('/LocationComponent/GetShelves', { rackId: rackId }, function (data) {
-                        $.each(data, function (index, item) {
-                            $('#ShelfId').append($('<option/>', {
-                                value: item.value,
-                                text: item.text
-                            }));
-                        });
-                    });
-                }
-            });
-
-            // Cascade dropdown for Bins based on Shelf selection
-            $('#ShelfId').change(function () {
-                var shelfId = $(this).val();
-                $('#BinId').empty().append('<option value="">-- Select Bin --</option>');
-
-                if (shelfId) {
-                    $.getJSON('/LocationComponent/GetBins', { shelfId: shelfId }, function (data) {
-                        $.each(data, function (index, item) {
-                            $('#BinId').append($('<option/>', {
-                                value: item.value,
-                                text: item.text
-                            }));
-                        });
-                    });
-                }
-            });
+            }
         });
     </script>
 }
+

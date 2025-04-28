@@ -12,15 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*             <div class="form-group">
-                <label asp-for="ItemId" class="control-label"></label>
-                <select asp-for="ItemId" class ="form-control" asp-items="ViewBag.ItemId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UnitId" class="control-label"></label>
-                <select asp-for="UnitId" class ="form-control" asp-items="ViewBag.UnitId"></select>
-            </div> *@
-
             <div class="form-group">
                 <label asp-for="ItemId" class="control-label"></label>
                 <select id="itemSelect" name="ItemId" class="form-control">
@@ -38,6 +29,15 @@
                     <option value="">-- Select Unit --</option>
                 </select>
 
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LocationComponentId">Location</label>
+                <select asp-for="LocationComponentId" class="form-control"
+                        asp-items="ViewBag.LocationComponentId">
+                    <option value="">-- Select Location --</option>
+                </select>
+                <span asp-validation-for="LocationComponentId" class="text-danger"></span>
             </div>
 
             <div class="form-group">

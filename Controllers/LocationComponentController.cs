@@ -32,8 +32,19 @@ namespace StoreManagement_Project.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new LocationComponentViewModel();
-            PopulateDropdowns(model);
+            var model = new LocationComponentViewModel
+            {
+                Warehouses = _context.Warehouses
+                    .Select(w => new SelectListItem { Value = w.WarehouseId.ToString(), Text = w.Name })
+                    .ToList(),
+
+                Aisles = new List<SelectListItem>(),   // Empty initially
+                Zones = new List<SelectListItem>(),
+                Racks = new List<SelectListItem>(),
+                Shelves = new List<SelectListItem>(),
+                Bins = new List<SelectListItem>()
+            };
+
             return View(model);
         }
 
@@ -42,6 +53,24 @@ namespace StoreManagement_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Generate the location string
+                var locationParts = new List<string>();
+
+                var aisleText = _context.Aisles.Where(a => a.AisleId == model.AisleId).Select(a => a.AisleName).FirstOrDefault();
+                var zoneText = _context.Zones.Where(z => z.ZoneId == model.ZoneId).Select(z => z.ZoneName).FirstOrDefault();
+                var rackText = _context.Racks.Where(r => r.RackId == model.RackId).Select(r => r.RackName).FirstOrDefault();
+                var shelfText = _context.shelves.Where(s => s.ShelfId == model.ShelfId).Select(s => s.ShelfName).FirstOrDefault();
+                var binText = _context.Bins.Where(b => b.BinId == model.BinId).Select(b => b.BinName).FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(aisleText)) locationParts.Add($"Aisle {aisleText}");
+                if (!string.IsNullOrEmpty(zoneText)) locationParts.Add($"Zone {zoneText}");
+                if (!string.IsNullOrEmpty(rackText)) locationParts.Add($"Rack {rackText}");
+                if (!string.IsNullOrEmpty(shelfText)) locationParts.Add($"Shelf {shelfText}");
+                if (!string.IsNullOrEmpty(binText)) locationParts.Add($"Bin {binText}");
+
+                string fullLocation = string.Join(" > ", locationParts);
+
+                // Create a new LocationComponent
                 var locationComponent = new LocationComponent
                 {
                     AisleId = model.AisleId,
@@ -49,31 +78,34 @@ namespace StoreManagement_Project.Controllers
                     RackId = model.RackId,
                     ShelfId = model.ShelfId,
                     BinId = model.BinId,
-                    WarehouseId = model.WarehouseId
+                    WarehouseId = model.WarehouseId,
+                    Location = fullLocation // Save the full location string
                 };
 
                 _context.LocationComponents.Add(locationComponent);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index"); // Redirect to list page after creation
+                return RedirectToAction("Index"); // Redirect to the list page after creation
             }
 
-            PopulateDropdowns(model); // Refill dropdowns if there is an error
+            // Re-populate dropdowns if model state is invalid
+            model.Warehouses = _context.Warehouses
+                .Select(w => new SelectListItem { Value = w.WarehouseId.ToString(), Text = w.Name })
+                .ToList();
+
             return View(model);
         }
 
-        private async Task PopulateDropdowns(LocationComponentViewModel model)
+
+        // Get all Warehouses
+        public JsonResult GetWarehouses()
         {
-            model.Aisles = new SelectList(await _context.Aisles.ToListAsync(), "AisleId", "AisleName", model.AisleId);
-            model.Zones = new SelectList(await _context.Zones.ToListAsync(), "ZoneId", "ZoneName", model.ZoneId);
-            model.Racks = new SelectList(await _context.Racks.ToListAsync(), "RackId", "RackName", model.RackId);
-            model.Shelves = new SelectList(await _context.shelves.ToListAsync(),
-                                           "ShelfId",
-                                           "ShelfName",
-                                           model.ShelfId);
-            model.Bins = new SelectList(await _context.Bins.ToListAsync(), "BinId", "BinName", model.BinId);
-            model.Warehouses = new SelectList(await _context.Warehouses.ToListAsync(), "WarehouseId", "WarehouseName", model.WarehouseId);
+            var warehouses = _context.Warehouses
+                                      .Select(w => new { value = w.WarehouseId, text = w.Name })
+                                      .ToList();
+            return Json(warehouses);
         }
+
         // Get Aisles based on WarehouseId
         public JsonResult GetAisles(int warehouseId)
         {
@@ -122,6 +154,71 @@ namespace StoreManagement_Project.Controllers
                                .Select(b => new { value = b.BinId, text = b.BinName })
                                .ToList();
             return Json(bins);
+        }
+        [HttpGet]
+        public JsonResult CheckDuplicateLocation(string location)
+        {
+            var exists = _context.LocationComponents.Any(l => l.Location == location);
+            return Json(!exists);
+        }
+        // GET: LocationComponent/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var locationComponent = await _context.LocationComponents
+                .Include(l => l.Aisle)
+                .Include(l => l.Zone)
+                .Include(l => l.Rack)
+                .Include(l => l.Shelf)
+                .Include(l => l.Bin)
+                .Include(l => l.Warehouse)
+                .FirstOrDefaultAsync(m => m.LocationComponentId == id);
+
+            if (locationComponent == null)
+            {
+                return NotFound();
+            }
+
+            return View(locationComponent);
+        }
+        // GET: LocationComponent/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var locationComponent = await _context.LocationComponents
+                .Include(l => l.Aisle)
+                .Include(l => l.Zone)
+                .Include(l => l.Rack)
+                .Include(l => l.Shelf)
+                .Include(l => l.Bin)
+                .Include(l => l.Warehouse)
+                .FirstOrDefaultAsync(m => m.LocationComponentId == id);
+
+            if (locationComponent == null)
+            {
+                return NotFound();
+            }
+
+            return View(locationComponent);
+        }
+
+        // POST: LocationComponent/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var locationComponent = await _context.LocationComponents.FindAsync(id);
+            _context.LocationComponents.Remove(locationComponent);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index)); // Redirect to the list page after deletion
         }
 
     }

@@ -6,6 +6,9 @@ namespace StoreManagement_Project.ViewModels
     {
         public int ItemId { get; set; }
         public string ItemName { get; set; } = string.Empty;
+        public int? LocationComponentId { get; set; }
+        public string? Location { get; set; }
+        public List<LocationComponent>? LocationComponents { get; set; }
         public decimal Quantity { get; set; }
         public string UnitName { get; set; } = string.Empty;
         public decimal QuantityReceived { get; set; }

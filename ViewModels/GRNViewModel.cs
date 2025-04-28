@@ -18,7 +18,6 @@ namespace StoreManagement_Project.ViewModels
         public string ReceivedBy { get; set; } = string.Empty;
         public int SupplierId { get; set; }
         public int PurchaseOrderId { get; set; }
-
         public int? WarehouseId { get; set; }
 
         [Display(Name = "Warehouse Name")]

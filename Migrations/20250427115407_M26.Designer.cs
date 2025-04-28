@@ -12,8 +12,8 @@ using StoreManagement_Project.Data;
 namespace StoreManagement_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250427105948_zannat")]
-    partial class zannat
+    [Migration("20250427115407_M26")]
+    partial class M26
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

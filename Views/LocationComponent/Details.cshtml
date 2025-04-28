@@ -1,0 +1,79 @@
+﻿@* @model StoreManagement_Project.Models.LocationComponent
+
+@{
+    ViewData["Title"] = "Location Component Details";
+}
+
+<h2>Location Component Details</h2>
+
+<div>
+    <h4>Location Component</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Warehouse</dt>
+        <dd class="col-sm-10">@Model.Warehouse.Name</dd>
+
+        <dt class="col-sm-2">Aisle</dt>
+        <dd class="col-sm-10">@Model.Aisle.AisleName</dd>
+
+        <dt class="col-sm-2">Zone</dt>
+        <dd class="col-sm-10">@Model.Zone.ZoneName</dd>
+
+        <dt class="col-sm-2">Rack</dt>
+        <dd class="col-sm-10">@Model.Rack.RackName</dd>
+
+        <dt class="col-sm-2">Shelf</dt>
+        <dd class="col-sm-10">@Model.Shelf.ShelfName</dd>
+
+        <dt class="col-sm-2">Bin</dt>
+        <dd class="col-sm-10">@Model.Bin.BinName</dd>
+
+        <dt class="col-sm-2">Location</dt>
+        <dd class="col-sm-10">@Model.Location</dd>
+    </dl>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<a asp-action="Edit" asp-route-id="@Model.LocationComponentId" class="btn btn-primary">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.LocationComponentId" class="btn btn-danger">Delete</a>
+
+ *@
+
+        @model StoreManagement_Project.Models.LocationComponent
+
+@{
+    ViewData["Title"] = "Location Component Details";
+}
+
+<h2>Location Component Details</h2>
+
+<div>
+    <h4>Location Component</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Warehouse</dt>
+        <dd class="col-sm-10">@Model.Warehouse?.Name </dd>
+
+        <dt class="col-sm-2">Aisle</dt>
+        <dd class="col-sm-10">@Model.Aisle?.AisleName  </dd>
+
+        <dt class="col-sm-2">Zone</dt>
+        <dd class="col-sm-10">@Model.Zone?.ZoneName  </dd>
+
+        <dt class="col-sm-2">Rack</dt>
+        <dd class="col-sm-10">@Model.Rack?.RackName  </dd>
+
+        <dt class="col-sm-2">Shelf</dt>
+        <dd class="col-sm-10">@Model.Shelf?.ShelfName  </dd>
+
+        <dt class="col-sm-2">Bin</dt>
+        <dd class="col-sm-10">@Model.Bin?.BinName </dd>
+
+        <dt class="col-sm-2">Location</dt>
+        <dd class="col-sm-10">@Model.Location </dd>
+    </dl>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+@* <a asp-action="Edit" asp-route-id="@Model.LocationComponentId" class="btn btn-primary">Edit</a> *@
+<a asp-action="Delete" asp-route-id="@Model.LocationComponentId" class="btn btn-danger">Delete</a>

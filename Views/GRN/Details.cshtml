@@ -18,47 +18,11 @@
 </div>
 
 <h4>Received Items</h4>
-
-@* <table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Item Name</th>
-            <th>Ordered Quantity</th>
-            <th>Unit</th>
-            <th>Quantity Received</th>
-            <th>Remaining Quantity</th>
-            <th>Inspection Done</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.GRNItems != null && Model.GRNItems.Any())
-        {
-            foreach (var item in Model.GRNItems)
-            {
-                <tr>
-                    <td>@item.ItemName</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.UnitName</td>
-                    <td>@item.QuantityReceived</td>
-                    <td>@item.RemainingQuantity</td>
-                    <td>@(item.Inspection ? "Yes" : "No")</td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr>
-                <td colspan="6" class="text-center">No items found.</td>
-            </tr>
-        }
-    </tbody>
-</table> *@
-
-@* <table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Item Name</th>
-            <th>Ordered Quantity</th>
+            @* <th>Ordered Quantity</th> *@
             <th>Unit</th>
             <th>Quantity Received</th>
             <th>Remaining Quantity</th>
@@ -72,7 +36,7 @@
             {
                 <tr>
                     <td>@item.Item?.ItemName ?? item.ItemName</td>
-                    <td>@(item.Quantity != 0 ? item.Quantity : item.Item?.Quantity ?? 0)</td>
+                    @* <td>@(item.Quantity != 0 ? item.Quantity : item.Item?.Quantity ?? 0)</td> *@
                     <td>@item.UnitName</td>
                     <td>@item.QuantityReceived</td>
                     <td>@(item.Quantity - item.QuantityReceived)</td>
@@ -89,4 +53,4 @@
     </tbody>
 </table>
 
-<a asp-action="Index" class="btn btn-secondary">Back to List</a> *@
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
