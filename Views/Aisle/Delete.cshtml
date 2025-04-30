@@ -1,39 +1,102 @@
 ﻿@model StoreManagement_Project.Models.Aisle
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Aisle";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-trash-alt me-2"></i>Delete Aisle
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Warning!
+                </h4>
+                <p>Are you sure you want to delete this aisle? This action cannot be undone.</p>
+            </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Aisle</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AisleName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AisleName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Warehouse)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Warehouse.WarehouseId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="AisleId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.AisleName):</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.AisleName)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Remarks):</dt>
+                        <dd class="col-sm-8">
+                            @if (!string.IsNullOrEmpty(Model.Remarks))
+                            {
+                                @Html.DisplayFor(model => model.Remarks)
+                            }
+                            else
+                            {
+                                <span class="text-muted">No remarks</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Warehouse):</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-info text-dark">
+                                Warehouse #@Html.DisplayFor(model => model.Warehouse.WarehouseId)
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="Delete" id="deleteForm">
+                <input type="hidden" asp-for="AisleId" />
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                    <button type="button" id="deleteBtn" class="btn btn-danger px-4">
+                        <i class="fas fa-trash-alt me-2"></i>Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $('#deleteBtn').click(function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show loading state
+                        $('#deleteBtn').html('<i class="fas fa-spinner fa-spin me-2"></i> Deleting...');
+
+                        // Submit the form
+                        $('#deleteForm').submit();
+
+                        // Show success message (this will only show if the page doesn't redirect)
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Aisle deleted successfully!',
+                            showConfirmButton: false,
+                            timer: 4000,
+                            toast: true,
+                            timerProgressBar: true
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

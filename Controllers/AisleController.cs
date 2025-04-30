@@ -55,6 +55,20 @@ namespace StoreManagement_Project.Controllers
         // POST: Aisle/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("AisleId,AisleName,Remarks,WarehouseId")] Aisle aisle)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(aisle);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "Name", aisle.WarehouseId);
+        //    return View(aisle);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AisleId,AisleName,Remarks,WarehouseId")] Aisle aisle)
@@ -63,11 +77,17 @@ namespace StoreManagement_Project.Controllers
             {
                 _context.Add(aisle);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                TempData["Success"] = "Aisle created successfully!";
+
+                // Redirect to same page to trigger SweetAlert2
+                return RedirectToAction(nameof(Create));
             }
+
             ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "Name", aisle.WarehouseId);
             return View(aisle);
         }
+
 
         // GET: Aisle/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -83,6 +103,9 @@ namespace StoreManagement_Project.Controllers
                 return NotFound();
             }
             ViewData["WarehouseId"] = new SelectList(_context.Warehouses, "WarehouseId", "Name", aisle.WarehouseId);
+            TempData["SuccessMessage"] = "Aisle updated successfully!";
+            //return RedirectToAction("Index");
+
             return View(aisle);
         }
 
@@ -137,7 +160,7 @@ namespace StoreManagement_Project.Controllers
             {
                 return NotFound();
             }
-
+            TempData["DeleteSuccess"] = true;
             return View(aisle);
         }
 

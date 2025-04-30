@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z8PRQ0LY26I=",
+  "dgSpecHash": "VavhARZM/0c=",
   "success": true,
-  "projectFilePath": "D:\\StoreManagement_Project_16_UpdateGRN\\StoreManagement_Project.csproj",
+  "projectFilePath": "D:\\StoreManagement_Project_(Asp.Net_Core)\\StoreManagement_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HASSAN AL BANNA\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\HASSAN AL BANNA\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

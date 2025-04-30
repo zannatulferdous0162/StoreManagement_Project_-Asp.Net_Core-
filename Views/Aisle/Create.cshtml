@@ -1,39 +1,96 @@
 ﻿@model StoreManagement_Project.Models.Aisle
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Aisle";
 }
 
-<h1>Create</h1>
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Create New Aisle</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-<h4>Aisle</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AisleName" class="control-label"></label>
-                <input asp-for="AisleName" class="form-control" />
-                <span asp-validation-for="AisleName" class="text-danger"></span>
+                        <div class="form-group mb-3">
+                            <label asp-for="AisleName" class="form-label fw-bold"></label>
+                            <input asp-for="AisleName" class="form-control" placeholder="Enter aisle name" required />
+                            <span asp-validation-for="AisleName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Remarks" class="form-label fw-bold"></label>
+                            <textarea asp-for="Remarks" class="form-control" rows="3" placeholder="Enter any remarks"></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="WarehouseId" class="form-label fw-bold"></label>
+                            <select asp-for="WarehouseId" class="form-select" asp-items="ViewBag.WarehouseId">
+                                <option value="">-- Select Warehouse --</option>
+                            </select>
+                            <span asp-validation-for="WarehouseId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fas fa-save me-2"></i>Create
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <img src="https://images.pexels.com/photos/256559/pexels-photo-256559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Aisle Illustration" style="max-width: 80%; opacity: 0.8;">
+                        <p class="text-muted mt-3">Add a new aisle to organize your warehouse inventory efficiently.</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WarehouseId" class="control-label"></label>
-                <select asp-for="WarehouseId" class ="form-control" asp-items="ViewBag.WarehouseId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    @* @await Html.RenderPartialAsync("_ValidationScriptsPartial") *@
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '@TempData["Success"]',
+                timer: 5000,
+                timerProgressBar: true,
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false
+            });
+        </script>
+    }
+}
