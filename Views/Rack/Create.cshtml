@@ -1,0 +1,154 @@
+﻿@model StoreManagement_Project.Models.Rack
+
+@{
+    ViewData["Title"] = "Create New Rack";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-radius: 8px 8px 0 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 6px;
+        padding: 10px 15px;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-outline-secondary {
+        border-radius: 6px;
+    }
+
+    .illustration-img {
+        max-width: 80%;
+        opacity: 0.8;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0"><i class="fas fa-layer-group me-2"></i>Create New Rack</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create" id="createForm" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="RackName" class="form-label fw-bold">Rack Name</label>
+                            <input asp-for="RackName" class="form-control" placeholder="Enter rack name" required />
+                            <span asp-validation-for="RackName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Remarks" class="form-label fw-bold">Remarks</label>
+                            <textarea asp-for="Remarks" class="form-control" rows="3" placeholder="Enter any remarks"></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="WarehouseId" class="form-label fw-bold">Warehouse</label>
+                            <select asp-for="WarehouseId" class="form-select" asp-items="ViewBag.WarehouseId" required>
+                                <option value="">-- Select Warehouse --</option>
+                            </select>
+                            <span asp-validation-for="WarehouseId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success px-4" id="submitBtn">
+                                <i class="fas fa-plus-circle me-2"></i>Create
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <img src="https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                             alt="Rack Illustration" class="illustration-img">
+                        <p class="text-muted mt-3">Create racks to organize items within your warehouse zones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#createForm').on('submit', function (e) {
+                e.preventDefault();
+
+                // Validate form first
+                if (!this.checkValidity()) {
+                    e.stopPropagation();
+                    $(this).addClass('was-validated');
+                    return;
+                }
+
+                // Show confirmation dialog
+                Swal.fire({
+                    title: 'Confirm Rack Creation',
+                    text: 'Are you sure you want to create this new rack?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, create it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show loading state
+                        $('#submitBtn').html('<i class="fas fa-spinner fa-spin me-2"></i> Creating...');
+
+                        // Submit the form after short delay
+                        setTimeout(() => {
+                            // Submit the form
+                            this.submit();
+                        }, 800);
+                    }
+                });
+            });
+        });
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: '@TempData["Success"]',
+                        timer: 5000,
+                        timerProgressBar: true,
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false
+                    });
+            </text>
+        }
+    </script>
+}

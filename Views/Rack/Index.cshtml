@@ -1,0 +1,256 @@
+﻿@model IEnumerable<StoreManagement_Project.Models.Rack>
+
+@{
+    ViewData["Title"] = "Rack Management";
+}
+
+<style>
+    /* Base styles */
+    body {
+        background-image: url('https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table th.bold-column {
+        font-weight: 600;
+        color: #000; /* চাইলে কালারও dark করা যায় */
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    /* ========== Responsive Breakpoints ========== */
+
+    /* Extra small devices (portrait phones, less than 576px) */
+    /* No changes needed - Bootstrap mobile-first handles this */
+
+    /* Small devices (landscape phones, 576px and up) */
+    @@media (min-width: 576px) {
+        .container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .action-links a {
+            margin-right: 8px;
+        }
+    }
+
+    /* Medium devices (tablets, 768px and up) */
+    @@media (min-width: 768px) {
+        .container {
+            max-width: 720px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .table th, .table td {
+            padding: 0.75rem;
+        }
+    }
+
+    /* Large devices (desktops, 992px and up) */
+    @@media (min-width: 992px) {
+        .container {
+            max-width: 960px;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .action-links a {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up) */
+    @@media (min-width: 1200px) {
+        .container {
+            max-width: 1140px;
+        }
+
+        .card {
+            margin: 2rem auto;
+        }
+
+        .table {
+            font-size: 1rem;
+        }
+    }
+
+    /* XX-Large devices (larger desktops, 1400px and up) */
+    @@media (min-width: 1400px) {
+        .container {
+            max-width: 1320px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+        }
+    }
+
+    /* Common styles for all devices */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+        .table th {
+            background: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+    .btn {
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #198754 0%, #157347 100%);
+        border: none;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-links a {
+        margin-right: 10px;
+        font-size: 0.9rem;
+    }
+
+    .swal2-popup {
+        border-radius: 10px !important;
+    }
+</style>
+
+<div class="container py-3 py-md-4 py-lg-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-warehouse me-2"></i>Rack Management
+            </h3>
+        </div>
+        <div class="card-body p-3 p-md-4 p-lg-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+                @* <h4 class="text-dark mb-3 mb-md-0">Rack Management</h4> *@
+                <a asp-action="Create" class="btn btn-success">
+                    <i class="fas fa-plus me-1 me-lg-2"></i>
+                    <span class="d-none d-md-inline">Create New Rack</span>
+                    <span class="d-md-none">Create New</span>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover" id="RackTable">
+                    <thead>
+                        <tr>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.RackName)</th>
+                            <th class="d-none d-sm-table-cell bold-column">@Html.DisplayNameFor(model => model.Remarks)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Warehouse)</th>
+                            <th class="bold-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.RackName)</td>
+                                <td class="d-none d-sm-table-cell">
+                                    @if (!string.IsNullOrEmpty(item.Remarks))
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Warehouse.Name)</td>
+                                <td class="action-links">
+                                    <a asp-action="Edit" asp-route-id="@item.RackId" class="text-primary">
+                                        <i class="fas fa-edit me-1"></i>
+
+                                        <span class="d-none d-lg-inline">Edit</span>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.RackId" class="text-info">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        <span class="d-none d-lg-inline">Details</span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.RackId" class="text-danger">
+                                        <i class="fas fa-trash-alt me-1"></i>
+                                        <span class="d-none d-lg-inline">Delete</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable with responsive extension
+            $('#RackTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "responsive": true,
+                "lengthMenu": [5, 10, 25, 50],
+                "pageLength": 10,
+                "language": {
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Search Racks..."
+                }
+            });
+        });
+    </script>
+}

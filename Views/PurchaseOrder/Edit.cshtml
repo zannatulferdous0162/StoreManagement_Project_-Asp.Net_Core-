@@ -1,0 +1,309 @@
+﻿@model StoreManagement_Project.Models.PurchaseOrder
+
+@{
+    ViewData["Title"] = "Edit Purchase Order";
+    var suppliers = ViewBag.Suppliers as List<StoreManagement_Project.Models.Supplier>;
+    var items = ViewBag.Items as List<StoreManagement_Project.Models.Item>;
+    var units = ViewBag.Units as List<StoreManagement_Project.Models.Unit>;
+    var warehouses = ViewBag.Warehouses as List<StoreManagement_Project.Models.Warehouse>;
+    var carrencies = ViewBag.Currencies as List<StoreManagement_Project.Models.Currency>;
+}
+
+<h2>Edit Purchase Order</h2>
+
+<form asp-action="Edit" method="post" id="poForm">
+    <input type="hidden" asp-for="PurchaseOrderId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="PONo" class="control-label">PO Number</label>
+                <input asp-for="PONo" class="form-control" required readonly/>
+                <span asp-validation-for="PONo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="POManualNumber" class="control-label">
+                    @* @Html.DisplayNameFor(model => model.POManualNumber) *@
+                </label>
+                <input asp-for="POManualNumber" class="form-control" placeholder="Enter PO Number">
+                <span asp-validation-for="POManualNumber" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="SupplierId" class="control-label">Supplier</label>
+                <select asp-for="SupplierId" class="form-control" required>
+                    <option value="">-- Select Supplier --</option>
+                    @foreach (var supplier in suppliers)
+                    {
+                        <option value="@supplier.SupplierId" selected="@(supplier.SupplierId == Model.SupplierId)">
+                            @supplier.SupplierName
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label">Order Date</label>
+                <input asp-for="OrderDate" type="date" class="form-control" required
+                       value="@Model.OrderDate.ToString("yyyy-MM-dd")" readonly />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="WarehouseId" class="control-label">Warehouse</label>
+                <select asp-for="WarehouseId" class="form-control" id="warehouseSelect" required>
+                    <option value="">-- Select Warehouse --</option>
+                    @foreach (var warehouse in warehouses)
+                    {
+                        <option value="@warehouse.WarehouseId" data-address="@warehouse.Address">
+                            @warehouse.Name
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="WarehouseId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ExpectedDeliveryDate" class="control-label">Expected Delivery</label>
+                <input asp-for="ExpectedDeliveryDate" class="form-control" type="date" value="@DateTime.Today.AddDays(4).ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="CurrencyId" class="control-label">Currency</label>
+                <select asp-for="CurrencyId" class="form-control" id="currencySelect" required>
+                    <option value="">-- Select Currency --</option>
+                        @foreach (var currency in carrencies)
+                        {
+                        <option value="@currency.CurrencyId" data-exchangerate="@currency.ExchangeRate">@currency.NameOfCurrency (@currency.SymbolOfCurrency)</option>
+                        }
+                </select>
+                <span asp-validation-for="CurrencyId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exchangeRate">Exchange Rate</label>
+                <input type="number" step="0.0001" min="0" class="form-control" id="exchangeRate" name="ExchangeRate" required />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Remarks">
+                        @* @Html.DisplayNameFor(model => model.Remarks) *@
+                </label>
+                <textarea asp-for="Remarks" class="form-control" placeholder="Enter any specific requirements or notes..."></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <h4>Items</h4>
+    <table class="table" id="itemsTable">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Unit</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.PurchaseOrderItem.Count; i++)
+            {
+                <tr class="item-row">
+                    <td>
+                        <select name="PurchaseOrderItem[@i].ItemId" class="form-control item-select" required>
+                            <option value="">-- Select Item --</option>
+                            @foreach (var item in items)
+                            {
+                                <option value="@item.ItemId"
+                                        data-unit="@item.UnitId"
+                                        selected="@(item.ItemId == Model.PurchaseOrderItem[i].ItemId)">
+                                    @item.ItemName (@item.ItemCode)
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input name="PurchaseOrderItem[@i].Quantity" type="number" min="1"
+                               class="form-control quantity" required value="@Model.PurchaseOrderItem[i].Quantity" />
+                    </td>
+                    <td>
+                        <input name="PurchaseOrderItem[@i].Price" type="number" step="0.01" min="0"
+                               class="form-control price" required value="@Model.PurchaseOrderItem[i].Price" />
+                    </td>
+                    <td>
+                        <select name="PurchaseOrderItem[@i].UnitId" class="form-control unit-select" required>
+                            <option value="">-- Select Unit --</option>
+                            @foreach (var unit in units)
+                            {
+                                <option value="@unit.UnitId"
+                                        selected="@(unit.UnitId == Model.PurchaseOrderItem[i].UnitId)">
+                                    @unit.NameOfUnit
+                                </option>
+                            }
+                        </select>
+                    </td>
+                    <td class="total">
+                        @(Model.PurchaseOrderItem[i].Quantity * Model.PurchaseOrderItem[i].Price).ToString("0.00")
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+                <td id="grandTotal">0.00</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-success" onclick="addRow()">
+            <i class="fas fa-plus"></i> Add Item
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Update Purchase Order
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+            const warehouseSelect = document.getElementById("warehouseSelect");
+            const deliveryPointInput = document.getElementById("deliveryPoint");
+
+            warehouseSelect.addEventListener("change", function () {
+                const selectedOption = this.options[this.selectedIndex];
+                const address = selectedOption.getAttribute("data-address");
+                deliveryPointInput.value = address || "";
+            });
+        });
+
+                    document.addEventListener("DOMContentLoaded", function () {
+                const currencySelect = document.getElementById("currencySelect");
+                const exchangeRateInput = document.getElementById("exchangeRate");
+
+                currencySelect.addEventListener("change", function () {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const exchangeRate = selectedOption.getAttribute("data-exchangerate");
+                    exchangeRateInput.value = exchangeRate || "";
+                });
+            });
+
+        let rowIndex = @Model.PurchaseOrderItem.Count;
+
+        function addRowEventListeners(row) {
+            const itemSelect = row.querySelector(".item-select");
+            const quantityInput = row.querySelector(".quantity");
+            const priceInput = row.querySelector(".price");
+            const unitSelect = row.querySelector(".unit-select");
+
+            itemSelect.addEventListener("change", function () {
+                const selectedOption = this.options[this.selectedIndex];
+                if (selectedOption.dataset.unit) {
+                    unitSelect.value = selectedOption.dataset.unit;
+                }
+                calculateRowTotal(row);
+            });
+
+            quantityInput.addEventListener("input", () => calculateRowTotal(row));
+            priceInput.addEventListener("input", () => calculateRowTotal(row));
+        }
+
+        function calculateRowTotal(row) {
+            const quantity = parseFloat(row.querySelector(".quantity").value) || 0;
+            const price = parseFloat(row.querySelector(".price").value) || 0;
+            const total = quantity * price;
+            row.querySelector(".total").textContent = total.toFixed(2);
+            calculateGrandTotal();
+        }
+
+        function calculateGrandTotal() {
+            let grandTotal = 0;
+            document.querySelectorAll(".item-row").forEach(row => {
+                const totalText = row.querySelector(".total").textContent;
+                grandTotal += parseFloat(totalText) || 0;
+            });
+            document.getElementById("grandTotal").textContent = grandTotal.toFixed(2);
+        }
+
+        function addRow() {
+            const table = document.querySelector("#itemsTable tbody");
+            const newRow = table.rows[0].cloneNode(true);
+            const inputs = newRow.querySelectorAll("input, select");
+
+            inputs.forEach(input => {
+                let name = input.name;
+                name = name.replace(/\[\d+\]/, `[${rowIndex}]`);
+                input.name = name;
+                if (input.type !== "hidden") input.value = "";
+            });
+
+            newRow.querySelector(".total").textContent = "0.00";
+            table.appendChild(newRow);
+            addRowEventListeners(newRow);
+            rowIndex++;
+        }
+
+        function removeRow(button) {
+            const row = button.closest("tr");
+            const table = row.closest("tbody");
+            if (table.rows.length > 1) {
+                table.removeChild(row);
+                calculateGrandTotal();
+            }
+        }
+
+        // Initialize all rows
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".item-row").forEach(row => {
+                addRowEventListeners(row);
+                calculateRowTotal(row);
+            });
+        });
+    </script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+

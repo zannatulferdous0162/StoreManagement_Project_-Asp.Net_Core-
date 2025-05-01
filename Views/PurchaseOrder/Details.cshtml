@@ -1,0 +1,88 @@
+﻿@model StoreManagement_Project.Models.PurchaseOrder
+
+@{
+    ViewData["Title"] = "Purchase Order Details";
+}
+
+<h2>Purchase Order Details</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+
+        <h5 class="card-title">PO No: @Model.PONo</h5>
+
+        <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Purchase Number:</strong> @Model.POManualNumber</p>
+                </div>     
+     
+                <div class="col-md-4">
+                    <p><strong>Supplier:</strong> @Model.Supplier?.SupplierName</p>
+                </div>      
+        
+                <div class="col-md-4">
+                    <p><strong>Order Date:</strong> @Model.OrderDate.ToString("yyyy-MM-dd")</p>
+                </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <p><strong>Order Date:</strong> @Model.OrderDate.ToString("yyyy-MM-dd")</p>
+            </div>        
+       
+            <div class="col-md-4">
+                <p><strong>Warehouse:</strong> @Model.Warehouse?.Name</p>
+            </div>  
+     
+            <div class="col-md-4">
+            <p><strong>Warehouse Address:</strong> @Model.Warehouse?.Address</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <p><strong>Expected Delivary Date:</strong> @Model.ExpectedDeliveryDate?.ToString("yyyy-MM-dd")</p>
+            </div>
+
+            <div class="col-md-4">
+                <p><strong>Currency:</strong> @Model.Currency?.NameOfCurrency (@Model.Currency?.SymbolOfCurrency)</p>
+            </div>
+
+            <div class="col-md-4">
+                <p><strong>Exchange Rate:</strong> @Model.Currency?.ExchangeRate </p>
+            </div>
+        </div>
+        <p><strong>Note:</strong> @Model.Remarks </p>
+    </div>
+</div>
+
+<h4>Ordered Items</h4>
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PurchaseOrderItem)
+        {
+            <tr>
+                <td>@item.Item?.ItemName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("0.00")</td>
+                <td>@item.Unit?.NameOfUnit</td>
+                <td>@(item.Quantity * item.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+</p>

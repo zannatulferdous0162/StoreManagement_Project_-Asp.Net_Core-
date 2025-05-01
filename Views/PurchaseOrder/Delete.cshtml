@@ -1,0 +1,55 @@
+﻿@model StoreManagement_Project.Models.PurchaseOrder
+
+@{
+    ViewData["Title"] = "Delete Purchase Order";
+}
+
+<h2>Delete Purchase Order</h2>
+
+<div class="alert alert-danger">
+    <strong>Are you sure you want to delete this Purchase Order?</strong>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">PO No: @Model.PONo</h5>
+        <p><strong>Supplier:</strong> @Model.Supplier?.SupplierName</p>
+        <p><strong>Order Date:</strong> @Model.OrderDate.ToString("yyyy-MM-dd")</p>
+        <p><strong>Delivery Point:</strong> @Model.DeliveryPoint</p>
+    </div>
+</div>
+
+<h4>Ordered Items</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PurchaseOrderItem)
+        {
+            <tr>
+                <td>@item.Item?.ItemName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price.ToString("0.00")</td>
+                <td>@item.Unit?.NameOfUnit</td>
+                <td>@(item.Quantity * item.Price).ToString("0.00")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="PurchaseOrderId" />
+    <button type="submit" class="btn btn-danger">
+        <i class="fas fa-trash-alt"></i> Confirm Delete
+    </button>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Cancel
+    </a>
+</form>

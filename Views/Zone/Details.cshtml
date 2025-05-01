@@ -1,0 +1,235 @@
+﻿@model StoreManagement_Project.Models.Zone
+
+@{
+    ViewData["Title"] = "Zone Details";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .details-card {
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        border: none;
+        overflow: hidden;
+        background: white;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+        color: white;
+        padding: 20px;
+    }
+
+    .detail-item {
+        padding: 15px 25px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #495057;
+        font-size: 1.05rem;
+    }
+
+    .detail-value {
+        color: #6c757d;
+        font-size: 1rem;
+    }
+
+    .action-btns {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #eee;
+    }
+
+    .btn-edit {
+        background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        border: none;
+        border-radius: 30px;
+        padding: 10px 25px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn-back {
+        background: linear-gradient(to right, #868f96 0%, #596164 100%);
+        border: none;
+        border-radius: 30px;
+        padding: 10px 25px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+
+        .btn-edit:hover, .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: white;
+        }
+
+    .empty-remarks {
+        color: #adb5bd;
+        font-style: italic;
+    }
+
+    .warehouse-badge {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .illustration-img {
+        max-width: 100%;
+        border-radius: 8px;
+        opacity: 0.9;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card details-card">
+                <div class="card-header text-center">
+                    <h2 class="mb-0">
+                        <i class="fas fa-map-marked-alt me-2"></i>Zone Details
+                    </h2>
+                </div>
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="detail-item">
+                                <div class="detail-label">@Html.DisplayNameFor(model => model.ZoneName)</div>
+                                <div class="detail-value mt-2">@Html.DisplayFor(model => model.ZoneName)</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">@Html.DisplayNameFor(model => model.Remarks)</div>
+                                <div class="detail-value mt-2">
+                                    @if (!string.IsNullOrEmpty(Model.Remarks))
+                                    {
+                                        @Html.DisplayFor(model => model.Remarks)
+                                    }
+                                    else
+                                    {
+                                        <span class="empty-remarks">No remarks provided</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">@Html.DisplayNameFor(model => model.Warehouse)</div>
+                                <div class="detail-value mt-2">
+                                    <span class="warehouse-badge">
+                                        <i class="fas fa-warehouse me-2"></i>
+                                        Warehouse #@Html.DisplayFor(model => model.Warehouse.WarehouseId)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center p-4">
+                            <img src="https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                 alt="Zone Illustration" class="illustration-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="action-btns text-center">
+                    <a asp-action="Edit" asp-route-id="@Model?.ZoneId" class="btn btn-edit" id="editBtn">
+                        <i class="fas fa-edit me-2"></i>Edit Zone
+                    </a>
+                    <a asp-action="Index" class="btn btn-back" id="backBtn">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            // Button hover effects
+            $('.btn-edit, .btn-back').hover(
+                function () {
+                    $(this).css('transform', 'translateY(-3px)');
+                },
+                function () {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+
+            // Button click effects
+            $('.btn-edit, .btn-back').click(function (e) {
+                // Don't animate if it's a regular link
+                if ($(this).attr('href').startsWith('#')) {
+                    e.preventDefault();
+                }
+                $(this).css('transform', 'scale(0.95)');
+                setTimeout(() => {
+                    $(this).css('transform', 'scale(1)');
+                }, 100);
+            });
+
+            // Edit button click confirmation
+            $('#editBtn').click(function (e) {
+                e.preventDefault();
+                const editUrl = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Edit Zone',
+                    text: 'You are about to edit this zone. Continue?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#4facfe',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, edit it!',
+                    cancelButtonText: 'Cancel',
+                    position: 'top-end',
+                    toast: true,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    background: '#f8f9fa'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = editUrl;
+                    }
+                });
+            });
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '@TempData["Success"]',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        toast: true,
+                        timerProgressBar: true,
+                        background: '#f8f9fa'
+                    });
+            </text>
+        }
+                });
+    </script>
+}

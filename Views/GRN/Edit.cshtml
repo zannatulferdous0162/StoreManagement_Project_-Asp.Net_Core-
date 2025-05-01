@@ -1,0 +1,97 @@
+﻿@model StoreManagement_Project.ViewModels.GRNViewModel
+
+@{
+    ViewData["Title"] = "Edit GRN";
+}
+
+<h2>Edit GRN</h2>
+
+<form asp-controller="GRN" asp-action="Edit" method="post">     
+    <input type="hidden" asp-for="GRNId" />
+    <input type="hidden" asp-for="GRNNumber" />
+
+    <div class="mb-3">
+        <label asp-for="GRNNumber" class="form-label"></label>
+        <input asp-for="GRNNumber" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SupplierId" class="form-label">Supplier</label>
+        <select asp-for="SupplierId" class="form-select" asp-items="Model.Suppliers" disabled></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PurchaseOrderId" class="form-label">Purchase Order</label>
+        <select asp-for="PurchaseOrderId" class="form-select" asp-items="Model.PurchaseOrders" disabled></select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="InvoiceDate" class="form-label"></label>
+        <input asp-for="InvoiceDate" class="form-control" type="date" />
+        <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="InvoiceNo" class="form-label"></label>
+        <input asp-for="InvoiceNo" class="form-control" />
+        <span asp-validation-for="InvoiceNo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReceivedBy" class="form-label"></label>
+        <input asp-for="ReceivedBy" class="form-control" />
+        <span asp-validation-for="ReceivedBy" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReceivedDate" class="form-label"></label>
+        <input asp-for="ReceivedDate" class="form-control" type="date" />
+        <span asp-validation-for="ReceivedDate" class="text-danger"></span>
+    </div>
+
+    <h4>Items</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Ordered Quantity</th>
+                <th>Unit</th>
+                <th>Received Quantity</th>
+                <th>Remaining Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.GRNItems.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.GRNItems[i].ItemName
+                        <input type="hidden" asp-for="GRNItems[@i].ItemId" />
+                        <input type="hidden" asp-for="GRNItems[@i].ItemName" />
+                    </td>
+                    <td>
+                        <input asp-for="GRNItems[@i].Quantity" class="form-control" readonly />
+                    </td>
+                    <td>
+                        <input asp-for="GRNItems[@i].UnitName" class="form-control" readonly />
+                    </td>
+                    <td>
+                        <input asp-for="GRNItems[@i].QuantityReceived" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="GRNItems[@i].RemainingQuantity" class="form-control" readonly />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Update GRN</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

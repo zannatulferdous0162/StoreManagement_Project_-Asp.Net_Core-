@@ -1,0 +1,56 @@
+﻿@model StoreManagement_Project.Models.GRN
+
+@{
+    ViewData["Title"] = "GRN Details";
+}
+
+<h2>GRN Details</h2>
+
+<div class="mb-3">
+    <strong>GRN Number:</strong> @Model.GRNNumber <br />
+    <strong>Supplier:</strong> @Model.Supplier?.SupplierName <br />
+    <strong>PO Number:</strong> @Model.PurchaseOrder?.PONo <br />
+    <strong>Warehouse Name:</strong> @Model.Warehouse?.Name <br />
+    <strong>Received Date:</strong> @Model.ReceivedDate.ToString("yyyy-MM-dd") <br />
+    <strong>Challan Date:</strong> @Model.InvoiceDate?.ToString("yyyy-MM-dd") <br />
+    <strong>Challan No:</strong> @Model.InvoiceNo <br />
+    <strong>Note:</strong> @Model.ReceivedBy <br />
+</div>
+
+<h4>Received Items</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            @* <th>Ordered Quantity</th> *@
+            <th>Unit</th>
+            <th>Quantity Received</th>
+            <th>Remaining Quantity</th>
+            <th>Inspection Done</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.GRNItems != null && Model.GRNItems.Any())
+        {
+            foreach (var item in Model.GRNItems)
+            {
+                <tr>
+                    <td>@item.Item?.ItemName ?? item.ItemName</td>
+                    @* <td>@(item.Quantity != 0 ? item.Quantity : item.Item?.Quantity ?? 0)</td> *@
+                    <td>@item.UnitName</td>
+                    <td>@item.QuantityReceived</td>
+                    <td>@(item.Quantity - item.QuantityReceived)</td>
+                    <td>@(item.Inspection ? "Yes" : "No")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No items found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

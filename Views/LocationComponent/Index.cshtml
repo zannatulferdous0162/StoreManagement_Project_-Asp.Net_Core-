@@ -1,0 +1,467 @@
+﻿@model IEnumerable<StoreManagement_Project.Models.LocationComponent>
+
+@{
+    ViewData["Title"] = "Location Management";
+}
+
+<style>
+    /* Base styles */
+    body {
+        background-image: url('https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table th.bold-column {
+        font-weight: 600;
+        color: #000;
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .filter-section {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .filter-group {
+        margin-bottom: 10px;
+    }
+
+    .filter-label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #495057;
+    }
+
+    /* ========== Responsive Breakpoints ========== */
+    /* Medium devices (tablets, 768px and up) */
+    @@media (min-width: 768px) {
+        .container {
+            max-width: 95%;
+        }
+    }
+
+    /* Large devices (desktops, 992px and up) */
+    @@media (min-width: 992px) {
+        .container {
+            max-width: 95%;
+        }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up) */
+    @@media (min-width: 1200px) {
+        .container {
+            max-width: 98%;
+        }
+    }
+
+    /* Common styles for all devices */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+        .table th {
+            background: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+    .btn {
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #198754 0%, #157347 100%);
+        border: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+        border: none;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-links a {
+        margin-right: 10px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .action-links .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        border-radius: 5px;
+        padding: 5px 10px;
+        border: 1px solid #ced4da;
+    }
+
+    .dataTables_length select {
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid #ced4da;
+    }
+
+    .badge-filter {
+        background-color: #e9ecef;
+        color: #495057;
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+        .badge-filter .close {
+            margin-left: 5px;
+            font-size: 1rem;
+        }
+</style>
+
+<div class="container py-3 py-md-4 py-lg-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+                <i class="fas fa-warehouse me-2"></i>Location Management
+            </h3>
+           @*  <div>
+                <a asp-action="Create" class="btn btn-success">
+                    <i class="fas fa-plus me-1"></i>
+                    <span class="d-none d-md-inline">Create New Location</span>
+                </a>
+            </div> *@
+        </div>
+      
+        <div class="card-body p-3 p-md-4 p-lg-5">
+          
+            <!-- Filter Section -->
+            <div class="filter-section mb-4">
+                <div class="row ">
+                   @*  <div class="col-md-3">
+                        <div class="filter-group">
+                            <label class="filter-label">Location</label>
+                            <input type="text" id="locationFilter" class="form-control form-control-sm" placeholder="Filter by location">
+                        </div>
+                    </div> *@
+                   @*  <div>
+                        <a asp-action="Create" class="btn btn-success">
+                            <i class="fas fa-plus me-1"></i>
+                            <span class="d-none d-md-inline">Create New Location</span>
+                        </a>
+                    </div> *@
+                    <div class="col-md-3">
+                        <div class="filter-group">
+                            <label class="filter-label">Warehouse</label>
+                            <select id="warehouseFilter" class="form-control form-control-sm">
+                                <option value="">All Warehouses</option>
+                                @foreach (var warehouse in Model.Select(x => x.Warehouse).Where(x => x != null).Distinct())
+                                {
+                                    <option value="@warehouse.Name">@warehouse.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="filter-group">
+                            <label class="filter-label">Aisle</label>
+                            <select id="aisleFilter" class="form-control form-control-sm">
+                                <option value="">All Aisles</option>
+                                @foreach (var aisle in Model.Select(x => x.Aisle).Where(x => x != null).Distinct())
+                                {
+                                    <option value="@aisle.AisleName">@aisle.AisleName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="filter-group">
+                            <label class="filter-label">Zone</label>
+                            <select id="zoneFilter" class="form-control form-control-sm">
+                                <option value="">All Zones</option>
+                                @foreach (var zone in Model.Select(x => x.Zone).Where(x => x != null).Distinct())
+                                {
+                                    <option value="@zone.ZoneName">@zone.ZoneName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <a asp-action="Create" class="btn btn-success w-75">
+                            <i class="fas fa-plus me-1"></i>
+                            <span class="d-none d-md-inline">Create New Location</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <button id="applyFilters" class="btn btn-primary btn-sm">
+                            <i class="fas fa-filter me-1"></i>Apply Filters
+                        </button>
+                        <button id="resetFilters" class="btn btn-outline-secondary btn-sm ms-2">
+                            <i class="fas fa-undo me-1"></i>Reset
+                        </button>
+                    </div>
+                </div>
+                <div id="activeFilters" class="mt-3"></div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover" id="LocationTable">
+                    <thead>
+                        <tr>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Location)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Warehouse)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Aisle)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Zone)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Rack)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Shelf)</th>
+                            <th class="bold-column">@Html.DisplayNameFor(model => model.Aisle)</th>
+                            <th class="bold-column text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                                <td>
+                                    @if (item.Warehouse != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Warehouse.Name)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Aisle != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Aisle.AisleName)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Zone != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Zone.ZoneName)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Rack != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Rack.RackName)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Shelf != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Shelf.ShelfName)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.Aisle != null)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Aisle.AisleName)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">None</span>
+                                    }
+                                </td>
+                                <td class="action-links text-center">
+                                    @* <a asp-action="Edit" asp-route-id="@item.LocationComponentId" class="btn btn-primary btn-sm" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a> *@
+                                    <a asp-action="Details" asp-route-id="@item.LocationComponentId" class="btn btn-info btn-sm" title="Details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.LocationComponentId" class="btn btn-danger btn-sm" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.13.6/api/fnMultiFilter.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#LocationTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "responsive": true,
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "pageLength": 10,
+                "language": {
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Search all columns...",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    }
+                },
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+                "initComplete": function() {
+                    $('.dataTables_filter input').addClass('form-control form-control-sm');
+                    $('.dataTables_length select').addClass('form-control form-control-sm');
+                }
+            });
+
+            // Apply filters
+            $('#applyFilters').click(function() {
+                // var locationFilter = $('#locationFilter').val().toLowerCase();
+                var warehouseFilter = $('#warehouseFilter').val();
+                var aisleFilter = $('#aisleFilter').val();
+                var zoneFilter = $('#zoneFilter').val();
+
+                // Clear previous filters
+                table.columns().search('').draw();
+
+                // Apply new filters
+                // if (locationFilter) {
+                //     table.column(0).search(locationFilter).draw();
+                // }
+                if (warehouseFilter) {
+                    table.column(1).search(warehouseFilter).draw();
+                }
+                if (aisleFilter) {
+                    table.column(2).search(aisleFilter).draw();
+                }
+                if (zoneFilter) {
+                    table.column(3).search(zoneFilter).draw();
+                }
+
+                // Show active filters
+                updateActiveFilters();
+            });
+
+            // Reset filters
+            $('#resetFilters').click(function() {
+                $('#locationFilter').val('');
+                $('#warehouseFilter').val('');
+                $('#aisleFilter').val('');
+                $('#zoneFilter').val('');
+                table.columns().search('').draw();
+                $('#activeFilters').empty();
+            });
+
+            // Update active filters display
+            function updateActiveFilters() {
+                var activeFilters = $('#activeFilters');
+                activeFilters.empty();
+
+                var locationFilter = $('#locationFilter').val();
+                var warehouseFilter = $('#warehouseFilter').val();
+                var aisleFilter = $('#aisleFilter').val();
+                var zoneFilter = $('#zoneFilter').val();
+
+                if (locationFilter) {
+                    activeFilters.append(createFilterBadge('Location: ' + locationFilter, 'locationFilter'));
+                }
+                if (warehouseFilter) {
+                    activeFilters.append(createFilterBadge('Warehouse: ' + warehouseFilter, 'warehouseFilter'));
+                }
+                if (aisleFilter) {
+                    activeFilters.append(createFilterBadge('Aisle: ' + aisleFilter, 'aisleFilter'));
+                }
+                if (zoneFilter) {
+                    activeFilters.append(createFilterBadge('Zone: ' + zoneFilter, 'zoneFilter'));
+                }
+            }
+
+            // Create filter badge
+            function createFilterBadge(text, filterId) {
+                return $('<span>').addClass('badge-filter').text(text)
+                    .append($('<button>').addClass('close').html('&times;')
+                    .click(function() {
+                        $('#' + filterId).val('');
+                        $('#applyFilters').click();
+                    }));
+            }
+
+            // Make table full width
+            $('.dataTables_scrollHeadInner').css('width', '100%');
+            $('.table').css('width', '100%');
+        });
+    </script>
+}

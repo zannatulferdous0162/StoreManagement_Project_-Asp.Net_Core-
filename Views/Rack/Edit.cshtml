@@ -1,0 +1,196 @@
+﻿@model StoreManagement_Project.Models.Rack
+
+@{
+    ViewData["Title"] = "Edit Rack";
+}
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 12px 15px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.3);
+            border-color: #86b7fe;
+            background-color: white;
+        }
+
+    .btn {
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+        border: none;
+    }
+
+    .btn-outline-secondary {
+        border: 1px solid #6c757d;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+    }
+
+    /* SweetAlert2 custom styling */
+    .swal2-popup {
+        border-radius: 10px !important;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg">
+                <div class="card-header text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Edit Rack
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" class="needs-validation" novalidate id="editForm">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+                        <input type="hidden" asp-for="RackId" />
+
+                        <div class="mb-4">
+                            <label asp-for="RackName" class="form-label fw-bold">Rack Name</label>
+                            <input asp-for="RackName" class="form-control" placeholder="Enter rack name" required />
+                            <span asp-validation-for="RackName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Remarks" class="form-label fw-bold">Remarks</label>
+                            <textarea asp-for="Remarks" class="form-control" rows="3" placeholder="Enter any remarks"></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="WarehouseId" class="form-label fw-bold">Warehouse</label>
+                            <select asp-for="WarehouseId" class="form-select" asp-items="@(new SelectList(ViewBag.WarehouseId, "Value", "Text"))" required>
+                                <option value="">-- Select Warehouse --</option>
+                            </select>
+                            <span asp-validation-for="WarehouseId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4" id="saveBtn">
+                                <i class="fas fa-save me-2"></i>Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        $(document).ready(function () {
+            // Initialize the dropdown properly
+            $('#WarehouseId').select2({
+                placeholder: "-- Select Warehouse --",
+                allowClear: true,
+                width: '100%'
+            });
+
+            $('#editForm').on('submit', function (e) {
+                e.preventDefault();
+
+                // Validate form first
+                if (!this.checkValidity()) {
+                    e.stopPropagation();
+                    $(this).addClass('was-validated');
+                    return;
+                }
+
+                // Show confirmation dialog
+                Swal.fire({
+                    position: 'top-end',
+                    title: 'Confirm Changes',
+                    text: 'Are you sure you want to save these changes?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0d6efd',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, save changes!',
+                    cancelButtonText: 'Cancel',
+                    background: '#f8f9fa',
+                    toast: true,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show loading state
+                        $('#saveBtn').html('<i class="fas fa-spinner fa-spin me-2"></i> Saving...');
+                        $('#saveBtn').prop('disabled', true);
+
+                        // Submit the form
+                        this.submit();
+                    }
+                });
+            });
+
+            // Button hover effects
+            $('.btn').hover(
+                function () {
+                    $(this).css('transform', 'translateY(-2px)');
+                },
+                function () {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+        });
+    </script>
+}

@@ -1,0 +1,156 @@
+﻿@model StoreManagement_Project.Models.Zone
+
+@{
+    ViewData["Title"] = "Delete Zone";
+}
+
+<style>
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-radius: 8px 8px 0 0 !important;
+    }
+
+    .alert-warning {
+        border-left: 4px solid #ffc107;
+    }
+
+    dt {
+        color: #495057;
+    }
+
+    .badge {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .text-muted {
+        font-style: italic;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-trash-alt me-2"></i>Delete Zone
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Warning!
+                </h4>
+                <p>Are you sure you want to delete this zone? This action cannot be undone.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.ZoneName):</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ZoneName)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Remarks):</dt>
+                        <dd class="col-sm-8">
+                            @if (!string.IsNullOrEmpty(Model.Remarks))
+                            {
+                                @Html.DisplayFor(model => model.Remarks)
+                            }
+                            else
+                            {
+                                <span class="text-muted">No remarks</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Warehouse):</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-info text-dark">
+                                Warehouse #@Html.DisplayFor(model => model.Warehouse.WarehouseId)
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                             alt="Delete Illustration" style="max-width: 80%; opacity: 0.7; border-radius: 8px;">
+                        <p class="text-muted mt-3">Deleting this zone will permanently remove it from the system.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="Delete" id="deleteForm">
+                <input type="hidden" asp-for="ZoneId" />
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to List
+                    </a>
+                    <button type="button" id="deleteBtn" class="btn btn-danger px-4">
+                        <i class="fas fa-trash-alt me-2"></i>Delete
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            $('#deleteBtn').click(function () {
+                Swal.fire({
+                    title: 'Confirm Zone Deletion',
+                    text: "This will permanently delete the zone and all associated data. This action cannot be undone!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                    backdrop: 'rgba(0,0,0,0.4)'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show loading state
+                        $('#deleteBtn').html('<i class="fas fa-spinner fa-spin me-2"></i> Deleting...');
+                        $('#deleteBtn').prop('disabled', true);
+
+                        // Submit the form
+                        $('#deleteForm').submit();
+                    }
+                });
+            });
+
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '@TempData["Success"]',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        toast: true,
+                        timerProgressBar: true
+                    });
+            </text>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error!',
+                        text: '@TempData["Error"]',
+                        showConfirmButton: true
+                    });
+            </text>
+        }
+                });
+    </script>
+}

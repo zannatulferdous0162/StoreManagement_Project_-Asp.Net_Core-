@@ -1,0 +1,74 @@
+﻿@model StoreManagement_Project.Models.Currency
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Currency</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CurrencyId" />
+            <div class="form-group">
+                <label asp-for="NameOfCurrency" class="control-label"></label>
+                <input asp-for="NameOfCurrency" class="form-control" />
+                <span asp-validation-for="NameOfCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SymbolOfCurrency" class="control-label"></label>
+                <input asp-for="SymbolOfCurrency" class="form-control" />
+                <span asp-validation-for="SymbolOfCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExchangeRate" class="control-label"></label>
+                <input asp-for="ExchangeRate" class="form-control" />
+                <span asp-validation-for="ExchangeRate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsBaseCurrency" id="isBaseCurrencyCheckbox" /> @Html.DisplayNameFor(model => model.IsBaseCurrency)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $.get('/Currency/CheckIfBaseCurrencyExists', function (exists) {
+                if (exists) {
+                    // If already a base currency exists, disable the checkbox
+                    $('#isBaseCurrencyCheckbox').prop('checked', false).prop('disabled', true);
+                } else {
+                    $('#isBaseCurrencyCheckbox').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+
+}
